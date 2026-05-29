@@ -20,7 +20,7 @@ export function LoginPage({ onBack, onLogin, onGoToRegister }: LoginPageProps) {
 
     try {
       // Envia os dados para a rota do seu servidor Node.js
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch('http://localhost:3500/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

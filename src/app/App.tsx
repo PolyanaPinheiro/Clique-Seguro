@@ -262,9 +262,30 @@ export default function App() {
     );
   }
 
+  // Marcar tutorial como concluído no backend
+  const handleTutorialComplete = async (tutorialId: string, tutorialTitle: string) => {
+    if (!isLoggedIn || !username || !selectedCategory) return;
+    try {
+      await fetch('/api/tutorial/complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, tutorialId, tutorialTitle, categoryId: selectedCategory }),
+      });
+    } catch {
+      // falha silenciosa
+    }
+  };
+
   // Renderizar TutorialPage se estiver na view de tutorial
   if (currentView === "tutorial" && selectedTutorialId) {
-    return <TutorialExample onBack={handleBackToCategory} />;
+    return (
+      <TutorialExample
+        onBack={handleBackToCategory}
+        onComplete={handleTutorialComplete}
+        isLoggedIn={isLoggedIn}
+        tutorialId={selectedTutorialId}
+      />
+    );
   }
 
   const handleIncreaseFontSize = () => {

@@ -32,6 +32,7 @@ interface TutorialPageWithImageProps {
   tutorialTitle: string;
   steps: TutorialStep[];
   onBack: () => void;
+  onComplete?: () => void;
 }
 
 export function TutorialPageWithImage({ 
@@ -39,7 +40,8 @@ export function TutorialPageWithImage({
   categoryColor, 
   tutorialTitle, 
   steps,
-  onBack 
+  onBack,
+  onComplete
 }: TutorialPageWithImageProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [fontSize, setFontSize] = useState<'normal' | 'large' | 'xlarge'>('normal');
@@ -74,8 +76,13 @@ export function TutorialPageWithImage({
   };
 
   const handleMarkComplete = () => {
-    if (!completedSteps.includes(currentStep)) {
-      setCompletedSteps([...completedSteps, currentStep]);
+    const newCompleted = completedSteps.includes(currentStep)
+      ? completedSteps
+      : [...completedSteps, currentStep];
+    setCompletedSteps(newCompleted);
+    // Se marcou o último passo, dispara onComplete
+    if (currentStep === steps.length - 1 && onComplete) {
+      onComplete();
     }
   };
 

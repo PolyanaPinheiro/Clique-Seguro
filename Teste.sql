@@ -1,6 +1,7 @@
 create database teste;
 use teste;
 
+-- Create
 create table Usuario(
 	id_usuario int not null auto_increment,
     nome varchar(100) not null,
@@ -30,3 +31,20 @@ create table Tutorial(
     primary key (id_tutorial)
     
 );
+
+CREATE TABLE progresso (
+	id_usuario INT NOT NULL, 
+	id_tutorial INT NOT NULL, 
+	id_titulo INT NOT NULL, 
+	id_categoria INT NOT NULL, 
+	concluido_em timestamp ON UPDATE CURRENT_TIMESTAMP
+
+);
+
+CREATE TABLE categoria(
+	id_categoria int auto_increment not null,
+    primary key(id_categoria)
+);
+
+
+alter table progresso ()

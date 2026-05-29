@@ -4,9 +4,12 @@ import { TutorialPageWithImage } from './TutorialPageWithImage';
 
 interface TutorialExampleProps {
   onBack: () => void;
+  onComplete?: (tutorialId: string, tutorialTitle: string) => void;
+  isLoggedIn?: boolean;
+  tutorialId?: string;
 }
 
-export function TutorialExample({ onBack }: TutorialExampleProps) {
+export function TutorialExample({ onBack, onComplete, isLoggedIn, tutorialId }: TutorialExampleProps) {
   // Exemplo: Tutorial "Como Identificar e Recusar Ligação Suspeita"
   const tutorialSteps = [
     {
@@ -79,11 +82,14 @@ export function TutorialExample({ onBack }: TutorialExampleProps) {
     }
   ];
 
+  const TUTORIAL_ID = tutorialId || 'identificar-ligacao-suspeita';
+  const TUTORIAL_TITLE = 'Como Identificar e Recusar Ligação Suspeita';
+
   return (
     <TutorialPageWithImage
       categoryName="Golpes e Segurança"
       categoryColor="bg-gradient-to-br from-orange-500 to-orange-600"
-      tutorialTitle="Como Identificar e Recusar Ligação Suspeita"
+      tutorialTitle={TUTORIAL_TITLE}
       steps={tutorialSteps}
       onBack={onBack}
     />
